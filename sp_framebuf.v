@@ -18,7 +18,7 @@ module sp_framebuf(input display,
    wire 	    clk0, clk1;
    wire [23:0] 	    q0, q1;
    
-   assign dispaddr = { ~col[5], row, col[4:0] };
+   assign dispaddr = { ~col[5], row+3'h1, col[4:0] };
 
    wire 	    update;
    assign update = !display;

@@ -9,7 +9,7 @@ all: lut.dat nyan.dat
 %.rgb: %.png
 	convert $< $@
 
-PWM_WIDTH=10
+PWM_WIDTH=9
 
 lut.dat: Makefile
 	perl -e '$$bits = $(PWM_WIDTH); for ($$i = 0; $$i < 256; $$i++) {printf "%0".$$bits."b\n", (((1<<$$bits)-1) * (($$i / 255) ** 3));}' > lut.dat
