@@ -1,0 +1,14 @@
+syntax:regexp
+
+~$
+\.sof$
+\.jic$
+\.qip$
+\.sdc$
+
+\.hex$
+\.rgb$
+\.dat$
+
+^incremental_db
+^db
