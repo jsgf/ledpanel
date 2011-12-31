@@ -28,10 +28,24 @@ module timing(input wire	 clk_in,
 	      output wire 		  frame_clk);
 
    parameter PWM_WIDTH = 12;
-   localparam PWM_END = PWM_WIDTH + 9;
-   localparam COUNTER = 1 + PWM_END;
+
+   localparam COL_START = 0;
+   localparam COL_WIDTH = 6;
+   localparam COL_END = COL_START + COL_WIDTH;
    
-   reg [COUNTER-1:0] 		  counter = 0;
+   localparam ROW_START = COL_END;
+   localparam ROW_WIDTH = 3;
+   localparam ROW_END = ROW_START + ROW_WIDTH;
+
+   localparam PWM_START = ROW_END;
+   localparam PWM_END = PWM_WIDTH + PWM_START;
+
+   localparam DIRFLAG_START = PWM_END;
+   localparam DIRFLAG_END = DIRFLAG_START + 1;
+
+   localparam COUNTER_WIDTH = DIRFLAG_END;
+   
+   reg [COUNTER_WIDTH-1:0] 		  counter = 0;
    
    always @ (posedge clk_in or posedge reset)
      begin
@@ -42,20 +56,20 @@ module timing(input wire	 clk_in,
 	end
      end
    
-   assign col = counter[5:0];
-   assign line = counter[8:6];
+   assign col = counter[COL_END-1:COL_START];
+   assign line = counter[ROW_END-1:ROW_START];
    wire [PWM_WIDTH-1:0] _pwm;
-   assign _pwm = counter[PWM_END-1:9];
+   assign _pwm = counter[PWM_END-1:PWM_START];
 `ifdef USE_ZIGZAG
    // Zigzag pwm avoids having all the LEDs turn on at once, but it
    // adds odd temporal phase effects for dim LEDs
-   assign pwm = counter[COUNTER-1] ? ~_pwm : _pwm;
+   assign pwm = counter[DIRFLAG_START] ? ~_pwm : _pwm;
 `else
    assign pwm = _pwm;
 `endif
 
    // Frame done at the end of a full pwm cycle
-   assign frame_clk = (counter[PWM_END-1:0] == 0);
+   assign frame_clk = (counter[DIRFLAG_START-1:0] == 0);
 
    // Latch when scanline finishes
    assign lat = (col == 0);
