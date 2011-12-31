@@ -22,23 +22,23 @@ module patterngen(input wire 	     pixclk,
    always @ (posedge pixclk or posedge reset)
      begin
 	if (reset) begin
-	   frameaddr = 0;
+	   frameaddr <= 0;
 	end else begin
-	   frameaddr = frameaddr + 1;
+	   frameaddr <= frameaddr + 'd1;
 	end
      end // always @ (posedge pixclk or posedge reset)
 
    always @ (posedge frameclk or posedge reset)
      begin
 	if (reset) begin
-	   framecount = 0;
-	   display = 0;
+	   framecount <= 0;
+	   display <= 0;
 	end else begin
 	   display <= ~display;
-	   framecount <= framecount + 1;
+	   framecount <= framecount + 'd1;
 	end
      end
 
-   assign addr = {row, col};
+   assign addr = frameaddr;
    assign write = pixclk;
 endmodule

@@ -28,21 +28,22 @@ module timing(input wire	 clk_in,
 	      output wire 		  frame_clk);
 
    parameter PWM_WIDTH = 12;
+   localparam COUNTER = PWM_WIDTH + 9;
    
-   reg [PWM_WIDTH-1+9:0] 		  counter = 0;
+   reg [COUNTER-1:0] 		  counter = 0;
    
    always @ (posedge clk_in or posedge reset)
      begin
 	if (reset) begin
 	   counter <= 0;
 	end else begin
-	   counter <= counter + 1;
+	   counter <= counter + 'd1;
 	end
      end
    
    assign col = counter[5:0];
    assign line = counter[8:6];
-   assign pwm = counter[PWM_WIDTH-1+9:9];
+   assign pwm = counter[COUNTER-1:9];
 
    // Frame done at the end of a full pwm cycle
    assign frame_clk = (counter == 0);

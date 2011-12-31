@@ -11,6 +11,6 @@ module sp_ram #(parameter DATA_WIDTH=8,
      begin
 	q <= ram[addr];
 	if (we)
-	  ram[addr] = data;
+	  ram[addr] <= data;
      end
 endmodule
