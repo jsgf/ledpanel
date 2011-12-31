@@ -17,8 +17,13 @@ module sp_framebuf(input display,
    wire 	    we0, we1;
    wire 	    clk0, clk1;
    wire [23:0] 	    q0, q1;
-   
-   assign dispaddr = { ~col[5], row+3'h1, col[4:0] };
+
+   // 'row' is the currently visible scanline, but we're clocking out
+   // the next scanline, so make sure we compute the address for it.
+   // Also, we feed the bottom row in first, followed by the top row,
+   // so invert the top-most bit to access the second row memory
+   // first.
+   assign dispaddr = { ~col[5], row+1'h1, col[4:0] };
 
    wire 	    update;
    assign update = !display;
