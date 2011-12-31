@@ -1,6 +1,7 @@
 module patterngen(input wire 	     pixclk,
 		  input wire 	     frameclk,
 		  input wire 	     reset,
+		  input wire 	     switchimg,
 
 		  output wire [8:0]  addr,
 		  output wire [23:0] rgb,
@@ -9,7 +10,8 @@ module patterngen(input wire 	     pixclk,
 		  output reg 	     display);
 
    reg [8:0] 			     frameaddr;
-   reg [12:0] 			     framecount;
+   reg [6:0] 			     framecount;
+   reg [2:0] 			     img;
 
    wire [4:0] 			     col;
    wire [3:0] 			     row;
@@ -17,7 +19,13 @@ module patterngen(input wire 	     pixclk,
    assign col = frameaddr[4:0];
    assign row = frameaddr[8:5];
 
-   nyan img({row, col - framecount[6:2]}, framecount[12:10], rgb);
+   nyan imgrom({row, col - framecount[6:2]}, img, rgb);
+
+   always @ (posedge switchimg or posedge reset)
+     if (reset)
+       img <= 0;
+     else
+       img <= img + 1'd1;
    
    always @ (posedge pixclk or posedge reset)
      begin
