@@ -8,8 +8,8 @@ module RGBpwm(input wire [PWM_WIDTH - 1:0] pwmlvl,
 	      output wire 		   blueled);
 
    parameter PWM_WIDTH = 12;
-   localparam [PWM_WIDTH-1:0] PWM_RANGE = (1<<PWM_WIDTH)-1;
-   localparam [PWM_WIDTH-1:0] HALFRANGE = PWM_RANGE/2;
+   //localparam [PWM_WIDTH-1:0] PWM_RANGE = (1<<PWM_WIDTH)-1;
+   //localparam [PWM_WIDTH-1:0] HALFRANGE = PWM_RANGE/2;
    
    function pwm;
       input [PWM_WIDTH-1:0] 		   lvl, pix;
