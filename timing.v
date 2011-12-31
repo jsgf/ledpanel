@@ -52,7 +52,7 @@ module timing(input wire	 clk_in,
 	if (reset) begin
 	   counter <= 0;
 	end else begin
-	   counter <= counter + 'd1;
+	   counter <= counter + 1'd1;
 	end
      end
    

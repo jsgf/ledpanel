@@ -32,7 +32,7 @@ module patterngen(input wire 	     pixclk,
 	if (reset) begin
 	   frameaddr <= 0;
 	end else begin
-	   frameaddr <= frameaddr + 'd1;
+	   frameaddr <= frameaddr + 1'd1;
 	end
      end // always @ (posedge pixclk or posedge reset)
 
@@ -43,7 +43,7 @@ module patterngen(input wire 	     pixclk,
 	   display <= 0;
 	end else begin
 	   display <= ~display;
-	   framecount <= framecount + 'd1;
+	   framecount <= framecount + 1'd1;
 	end
      end
 
