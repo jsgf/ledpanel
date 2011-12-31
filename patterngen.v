@@ -17,10 +17,7 @@ module patterngen(input wire 	     pixclk,
    assign col = frameaddr[4:0];
    assign row = frameaddr[8:5];
 
-   //wire [23:0] 			     nrgb;
-   //assign rgb = (col == 0 || col == 31) ? 24'h00ffff : (row == 0 || row == 15) ? 24'hff00ff : nrgb;
-   
-   nyan n({row, col - framecount[6:2]}, rgb);
+   nyan img({row, col - framecount[6:2]}, rgb);
    
    always @ (posedge pixclk or posedge reset)
      begin

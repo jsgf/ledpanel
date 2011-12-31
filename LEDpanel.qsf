@@ -113,7 +113,6 @@ set_global_assignment -name VERILOG_FILE sp_framebuf.v
 set_global_assignment -name VERILOG_FILE patterngen.v
 set_global_assignment -name VERILOG_FILE timing.v
 set_global_assignment -name VERILOG_FILE RGBpwm.v
-set_global_assignment -name VERILOG_FILE ramp.v
 set_global_assignment -name BDF_FILE LEDpanel.bdf
 set_global_assignment -name QIP_FILE pll.qip
 set_global_assignment -name SYNTH_TIMING_DRIVEN_SYNTHESIS ON

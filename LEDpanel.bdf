@@ -798,20 +798,14 @@ applicable agreement for further details.
 	(pt 32 296)
 )
 (connector
-	(text "row[2..0]" (rect 212 112 255 122)(font "Arial" ))
-	(pt 200 120)
-	(pt 168 120)
-	(bus)
-)
-(connector
-	(text "row[2..0]" (rect 300 112 343 122)(font "Arial" ))
-	(pt 392 120)
-	(pt 352 120)
-	(bus)
-)
-(connector
 	(pt 168 136)
 	(pt 392 136)
+	(bus)
+)
+(connector
+	(text "row[2..0]" (rect 212 104 255 114)(font "Arial" ))
+	(pt 168 120)
+	(pt 392 120)
 	(bus)
 )
 (junction (pt -144 16))
