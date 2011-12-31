@@ -9,7 +9,7 @@ module patterngen(input wire 	     pixclk,
 		  output reg 	     display);
 
    reg [8:0] 			     frameaddr;
-   reg [6:0] 			     framecount;
+   reg [12:0] 			     framecount;
 
    wire [4:0] 			     col;
    wire [3:0] 			     row;
@@ -17,7 +17,7 @@ module patterngen(input wire 	     pixclk,
    assign col = frameaddr[4:0];
    assign row = frameaddr[8:5];
 
-   nyan img({row, col - framecount[6:2]}, rgb);
+   nyan img({row, col - framecount[6:2]}, framecount[12:10], rgb);
    
    always @ (posedge pixclk or posedge reset)
      begin
